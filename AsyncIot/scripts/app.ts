@@ -65,17 +65,7 @@ class LineChart {
     }
 }
 
-function onBoxHover(eId, id: string): void {
 
-    if (id === "in") {
-        $(eId).css("background", "#3a5d96").css("color", "white");
-        $(eId).children().css("background", "#3a5d96").css("color", "white");
-
-    } else {
-        $(eId).css("background", "white").css("color", "black");
-        $(eId).children().css("background", "white").css("color", "black");
-    }
-}
 
 // ReSharper disable InconsistentNaming
 class Sensor {
@@ -143,7 +133,7 @@ class WebApi {
             contentType: "application/json"
         }).done((model: HomeViewModel) => {
 
-            this.time.html(() => model.Time);
+            this.time.html(() => `TIME: ${model.Time} h`);
 
             this.emptyDivs();
 

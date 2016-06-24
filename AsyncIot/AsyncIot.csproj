@@ -183,6 +183,7 @@
     <Content Include="Content\favicon\apple-icon-76x76.png" />
     <Content Include="Content\favicon\apple-icon-precomposed.png" />
     <Content Include="Content\favicon\apple-icon.png" />
+    <Content Include="Content\favicon\browserconfig.xml" />
     <Content Include="Content\favicon\favicon-16x16.png" />
     <Content Include="Content\favicon\favicon-32x32.png" />
     <Content Include="Content\favicon\favicon-96x96.png" />

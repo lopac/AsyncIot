@@ -1,11 +1,12 @@
 ﻿.refresh:hover {
     color: #dcdcdc;
 }
+
+.refresh {
+    color: black;
+}
+
 .widget li {
-    /*max-width: 500px;*/
-    /*margin-left: 3px;
-    margin-top: 3px;
-    margin-right: 3px;*/
     background: #fff;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 64, 58, 0.15);
@@ -17,6 +18,15 @@
     transform: scale(0);
 }
 
+/*.widget li:hover  {
+    background: #3a5d96;
+    color: white;
+}
+
+.widget li:hover * {
+    background: #3a5d96;
+    color: white;
+}*/
 
 
 

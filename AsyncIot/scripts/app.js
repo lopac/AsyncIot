@@ -51,16 +51,6 @@ var LineChart = (function () {
     }
     return LineChart;
 }());
-function onBoxHover(eId, id) {
-    if (id === "in") {
-        $(eId).css("background", "#3a5d96").css("color", "white");
-        $(eId).children().css("background", "#3a5d96").css("color", "white");
-    }
-    else {
-        $(eId).css("background", "white").css("color", "black");
-        $(eId).children().css("background", "white").css("color", "black");
-    }
-}
 // ReSharper disable InconsistentNaming
 var Sensor = (function () {
     function Sensor() {
@@ -100,7 +90,7 @@ var WebApi = (function () {
             url: "../api/Sensor",
             contentType: "application/json"
         }).done(function (model) {
-            _this.time.html(function () { return model.Time; });
+            _this.time.html(function () { return ("TIME: " + model.Time + " h"); });
             _this.emptyDivs();
             _this.outside.append(model.Sensor.Outside + "<small><sup>\u00B0</sup>C</small>");
             _this.inside.append(model.Sensor.Inside + "<small><sup>\u00B0</sup>C</small>");
