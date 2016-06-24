@@ -8,7 +8,12 @@ interface ISeries<T> {
 
 class Series implements ISeries<number> {
     name: string;
-    data: number[];
+    data: Array<number>;
+
+    constructor(name?: string) {
+        this.name = name;
+        this.data = new Array<number>();
+    }
 }
 
 class LineChart {
@@ -50,8 +55,8 @@ class LineChart {
                 valueSuffix: ""
             },
             legend: {
-                layout: "horizontal",
-                align: "right",
+                layout: "vertical",
+                align: "left",
                 verticalAlign: "middle",
                 borderWidth: 0
             },
@@ -158,6 +163,25 @@ class WebApi {
     }
 }
 
+class CentralHeating {
+    Water: number;
+    Dayset: number;
+    Nightset: number;
+}
+
+class Snap {
+    CentralHeating: CentralHeating;
+    Sensor: Sensor;
+    DateTime: string;
+}
+
+class List<T> {
+    private array: Array<T>;
+
+    constructor() {
+        this.array = new Array<T>();
+    }
+}
 
 window.onload = () => {
 
@@ -165,24 +189,40 @@ window.onload = () => {
         type: "GET",
         url: "../api/Snaps/today"
         //contentType: "application/json"
-    }).done((result) => {
+    }).done((snaps: Array<Snap>) => {
 
-        console.log(result);
+        console.log(snaps[0]);
 
-        });
+
+        let labels: Array<string> = new Array<string>();
+        let insideS = new Series("Inside");
+        let outsideS = new Series("Outside");
+        let luxS = new Series("Lux");
+        let humidityS = new Series("Humidity");
+
+        for (let i = 0; i < snaps.length; i++) {
+            insideS.data.push(snaps[i].Sensor.Inside);
+            outsideS.data.push(snaps[i].Sensor.Outside);
+            humidityS.data.push(snaps[i].Sensor.Humidity);
+            luxS.data.push(snaps[i].Sensor.Lux);
+
+            labels.push(snaps[i].DateTime.split("T")[1].split(".")[0].substring(0, 5));
+
+        }
+
+        let series = new Array<Series>();
+
+        series.push(insideS);
+        series.push(outsideS);
+        series.push(luxS);
+        series.push(humidityS);
+
+        let chart = new LineChart(labels,series);
+
+    });
 
     let api = new WebApi();
 
-    //let ba = new Array<ISeries<number>>();
-
-    //let i : ISeries<number> = new Series();
-
-    //i.name = "Inside";
-    //i.data = [22.3, 25.6, 26.4, 30.6];
-
-    //ba.push(i);
-
-    //let chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"],ba);
 
     const body = document.body;
     setTimeout(() => {

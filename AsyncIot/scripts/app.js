@@ -1,7 +1,9 @@
 /// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../scripts/typings/highcharts/highcharts.d.ts" />
 var Series = (function () {
-    function Series() {
+    function Series(name) {
+        this.name = name;
+        this.data = new Array();
     }
     return Series;
 }());
@@ -39,8 +41,8 @@ var LineChart = (function () {
                 valueSuffix: ""
             },
             legend: {
-                layout: "horizontal",
-                align: "right",
+                layout: "vertical",
+                align: "left",
                 verticalAlign: "middle",
                 borderWidth: 0
             },
@@ -104,20 +106,48 @@ var WebApi = (function () {
     };
     return WebApi;
 }());
+var CentralHeating = (function () {
+    function CentralHeating() {
+    }
+    return CentralHeating;
+}());
+var Snap = (function () {
+    function Snap() {
+    }
+    return Snap;
+}());
+var List = (function () {
+    function List() {
+        this.array = new Array();
+    }
+    return List;
+}());
 window.onload = function () {
     $.ajax({
         type: "GET",
         url: "../api/Snaps/today"
-    }).done(function (result) {
-        console.log(result);
+    }).done(function (snaps) {
+        console.log(snaps[0]);
+        var labels = new Array();
+        var insideS = new Series("Inside");
+        var outsideS = new Series("Outside");
+        var luxS = new Series("Lux");
+        var humidityS = new Series("Humidity");
+        for (var i = 0; i < snaps.length; i++) {
+            insideS.data.push(snaps[i].Sensor.Inside);
+            outsideS.data.push(snaps[i].Sensor.Outside);
+            humidityS.data.push(snaps[i].Sensor.Humidity);
+            luxS.data.push(snaps[i].Sensor.Lux);
+            labels.push(snaps[i].DateTime.split("T")[1].split(".")[0].substring(0, 5));
+        }
+        var series = new Array();
+        series.push(insideS);
+        series.push(outsideS);
+        series.push(luxS);
+        series.push(humidityS);
+        var chart = new LineChart(labels, series);
     });
     var api = new WebApi();
-    //let ba = new Array<ISeries<number>>();
-    //let i : ISeries<number> = new Series();
-    //i.name = "Inside";
-    //i.data = [22.3, 25.6, 26.4, 30.6];
-    //ba.push(i);
-    //let chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"],ba);
     var body = document.body;
     setTimeout(function () {
         body.classList.add("active");

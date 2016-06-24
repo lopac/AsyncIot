@@ -6,6 +6,10 @@
     color: black;
 }
 
+.highcharts-legend {
+    margin-top: 200px;
+}
+
 .widget li {
     background: #fff;
     text-align: center;
