@@ -1,0 +1,79 @@
+﻿
+.widget li {
+  max-width: 500px;
+    margin-left: 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 64, 58, 0.15);
+  -webkit-transition: all 0.3s cubic-bezier(0.67, 0.13, 0.1, 0.81);
+  transition: all 0.3s cubic-bezier(0.67, 0.13, 0.1, 0.81);
+  -webkit-transform-origin: right bottom;
+          transform-origin: right bottom;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.widget li:hover {
+    background: #dcdcdc;
+}
+
+ .widget li:nth-child(2) {
+  -webkit-transform-origin: left bottom;
+          transform-origin: left bottom;
+  -webkit-transition-delay: .1s;
+          transition-delay: .1s;
+}
+ .widget li:nth-child(3) {
+  -webkit-transform-origin: right top;
+          transform-origin: right top;
+  -webkit-transition-delay: .2s;    
+          transition-delay: .2s;
+}
+ .widget li:nth-child(4) {
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+  -webkit-transition-delay: .3s;
+          transition-delay: .3s;
+}
+ .widget li h2 {
+  font-size: 15px;
+  opacity: .9;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+ .widget li .val {
+  font-size: 50px;
+  font-weight: 100;
+  color: #343a42;
+}
+ .widget li .val small {
+  font-size: 30px;
+}
+
+
+.active  .widget li {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.5s cubic-bezier(0.67, 0.13, 0.1, 0.81);
+  transition: all 0.5s cubic-bezier(0.67, 0.13, 0.1, 0.81);
+}
+.active  .widget li:nth-child(2) {
+  -webkit-transform-origin: left bottom;
+          transform-origin: left bottom;
+  -webkit-transition-delay: .2s;
+          transition-delay: .2s;
+}
+.active  .widget li:nth-child(3) {
+  -webkit-transform-origin: right top;
+          transform-origin: right top;
+  -webkit-transition-delay: .4s;
+          transition-delay: .4s;
+}
+.active  .widget li:nth-child(4) {
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+  -webkit-transition-delay: .6s;
+          transition-delay: .6s;
+}
