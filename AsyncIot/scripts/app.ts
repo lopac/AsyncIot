@@ -67,12 +67,6 @@ class LineChart {
 
 function onBoxHover(eId, id: string): void {
 
-    /*.widget li:hover + .val{ 
-    background: #3a5d96;
-    color: white;
-}*/
-
-    console.log(eId);
     if (id === "in") {
         $(eId).css("background", "#3a5d96").css("color", "white");
         $(eId).children().css("background", "#3a5d96").css("color", "white");
@@ -82,6 +76,98 @@ function onBoxHover(eId, id: string): void {
         $(eId).children().css("background", "white").css("color", "black");
     }
 }
+
+// ReSharper disable InconsistentNaming
+class Sensor {
+    Inside: number;
+    Outside: number;
+    Humidity: number;
+    Lux: number;
+    Smoke: number;
+}
+
+class HomeViewModel {
+    Time: string;
+    Sensor: Sensor;
+    OutsideMin: number;
+    OutsideMax: number;
+    OutsideMinTime: string;
+    OutsideMaxTime: string;
+}
+
+// ReSharper restore InconsistentNaming
+
+class WebApi {
+
+    time: JQuery;
+
+    inside: JQuery;
+    outside: JQuery;
+    humidity: JQuery;
+    lux: JQuery;
+    //todo smoke : JQuery;
+
+    outsideMin: JQuery;
+    outsideMax: JQuery;
+    outsideMinTime: JQuery;
+    outsideMaxTime: JQuery;
+
+
+    constructor() {
+        this.time = $("#time");
+        this.outside = $("#out-temp");
+        this.inside = $("#in-temp");
+        this.humidity = $("#humidity");
+        this.lux = $("#lux");
+
+        this.outsideMin = $("#out-min");
+        this.outsideMinTime = $("#out-min-time");
+
+        this.outsideMax = $("#out-max");
+        this.outsideMaxTime = $("#out-max-time");
+    }
+
+    private emptyDivs() {
+        this.outside.empty();
+        this.inside.empty();
+        this.humidity.empty();
+        this.lux.empty();
+        this.outsideMin.empty();
+        this.outsideMax.empty();
+    }
+
+    refreshData() {
+        $.ajax({
+            type: "GET",
+            url: "../api/Sensor",
+            contentType: "application/json"
+        }).done((model: HomeViewModel) => {
+
+            this.time.html(() => model.Time);
+
+            this.emptyDivs();
+
+          
+
+            this.outside.append(`${model.Sensor.Outside}<small><sup>°</sup>C</small>`);
+            this.inside.append(`${model.Sensor.Inside}<small><sup>°</sup>C</small>`);
+
+
+            this.humidity.append(`${model.Sensor.Humidity}<small>%</small>`);
+
+
+            this.lux.append(`${model.Sensor.Lux}<small>lux</small>`);
+
+            this.outsideMinTime.html(() => `MIN at ${model.OutsideMinTime}`);
+            this.outsideMaxTime.html(() => `MAX at ${model.OutsideMaxTime}`);
+
+            this.outsideMin.append(`${model.OutsideMin}<small><sup>°</sup>C</small>`);
+            this.outsideMax.append(`${model.OutsideMax}<small><sup>°</sup>C</small>`);
+
+        });
+    }
+}
+
 
 window.onload = () => {
 
@@ -95,18 +181,20 @@ window.onload = () => {
 
         });
 
-    let ba = new Array<ISeries<number>>();
+    let api = new WebApi();
 
-    let i : ISeries<number> = new Series();
+    //let ba = new Array<ISeries<number>>();
 
-    i.name = "Inside";
-    i.data = [22.3, 25.6, 26.4, 30.6];
+    //let i : ISeries<number> = new Series();
 
-    ba.push(i);
+    //i.name = "Inside";
+    //i.data = [22.3, 25.6, 26.4, 30.6];
 
-    let chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"],ba);
+    //ba.push(i);
 
-    var body = document.body;
+    //let chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"],ba);
+
+    const body = document.body;
     setTimeout(() => {
         body.classList.add("active");
     }, 200);
@@ -114,6 +202,7 @@ window.onload = () => {
     $(".refresh")
         .click(() => {
             body.classList.remove("active");
+            api.refreshData();
             setTimeout(() => {
                 body.classList.add("active");
             }, 1500);

@@ -11,21 +11,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="Content/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="Content/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="Content/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="Content/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="Content/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="Content/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="Content/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="Content/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="Content/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="Content/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="Content/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="Content/favicon/favicon-16x16.png">
-    <link rel="manifest" href="Content/favicon/manifest.json">
+    <link rel="apple-touch-icon" sizes="57x57" href="/Content/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Content/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/Content/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Content/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/Content/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/Content/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/Content/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/Content/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Content/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/Content/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Content/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/Content/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="Content/favicon/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="/Content/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
     <title>Async IOT</title>
@@ -76,47 +76,47 @@
 
             <span class="refresh glyphicon glyphicon-refresh col-md-8" aria-hidden="true"></span>
 
-            <h3 class="col-md-4 col-xs-12">@Model.Time</h3>
+            <h3 id="time" class="col-md-4 col-xs-12">@Model.Time</h3>
             <ul class="widget col-md-12 row">
                 <li class="col-md-6 col-xs-12" onmouseover="onBoxHover(this, 'in')" onmouseout="onBoxHover(this, 'out')">
                     <h2>Outside Temperature</h2>
-                    <div class="val">
+                    <div id="out-temp" class="val">
                         @Model.Sensor.Outside<small><sup>°</sup>c</small>
                     </div>
                 </li>
                 <li class="col-md-6 col-xs-12" onmouseover="onBoxHover(this, 'in')" onmouseout="onBoxHover(this,'out')">
                     <h2>Inside Temperature</h2>
-                    <div class="val">
+                    <div id="in-temp" class="val">
                         @Model.Sensor.Inside<small><sup>°</sup>c</small>
                     </div>
                 </li>
                 <li class="col-md-6 col-xs-12" onmouseover="onBoxHover(this, 'in')" onmouseout="onBoxHover(this,'out')">
                     <h2>Humidity</h2>
-                    <div class="val">
+                    <div id="humidity" class="val">
                         @Model.Sensor.Humidity<small>%</small>
                     </div>
                 </li>
                 <li class="col-md-6 col-xs-12" onmouseover="onBoxHover(this, 'in')" onmouseout="onBoxHover(this,'out')">
                     <h2>illuminance</h2>
-                    <div class="val">
+                    <div id="lux" class="val">
                         @Model.Sensor.Lux<small>lux</small>
                     </div>
                 </li>
                 <li class="col-md-6 col-xs-12" style="background: #22375a; color: white;">
-                    <h2>Min. outside at @Model.OutsideMinTime</h2>
-                    <div class="val" style="color: white;">
+                    <h2 id="out-min-time">Min. outside at @Model.OutsideMinTime</h2>
+                    <div id="out-min" class="val" style="color: white;">
                         @Model.OutsideMin<small><sup>°</sup>c</small>
                     </div>
                 </li>
                 <li class="col-md-6 col-xs-12" style="background: #d05340; color: white;">
-                    <h2>Max. outside at @Model.OutsideMaxTime</h2>
-                    <div class="val" style="color: white;">
+                    <h2 id="out-max-time">Max. outside at @Model.OutsideMaxTime</h2>
+                    <div id="out-max" class="val" style="color: white;">
                         @Model.OutsideMax<small><sup>°</sup>c</small>
                     </div>
                 </li>
             </ul>
 
-            <div id="graphChart" class="col-xs-12 col-lg-12" style="margin-bottom: 200px;"></div>
+            <div id="graphChart" class="col-xs-12 col-lg-12" style="margin-bottom: 200px; margin-top: 50px;"></div>
 
 
 

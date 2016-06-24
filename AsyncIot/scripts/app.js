@@ -52,11 +52,6 @@ var LineChart = (function () {
     return LineChart;
 }());
 function onBoxHover(eId, id) {
-    /*.widget li:hover + .val{
-    background: #3a5d96;
-    color: white;
-}*/
-    console.log(eId);
     if (id === "in") {
         $(eId).css("background", "#3a5d96").css("color", "white");
         $(eId).children().css("background", "#3a5d96").css("color", "white");
@@ -66,6 +61,59 @@ function onBoxHover(eId, id) {
         $(eId).children().css("background", "white").css("color", "black");
     }
 }
+// ReSharper disable InconsistentNaming
+var Sensor = (function () {
+    function Sensor() {
+    }
+    return Sensor;
+}());
+var HomeViewModel = (function () {
+    function HomeViewModel() {
+    }
+    return HomeViewModel;
+}());
+// ReSharper restore InconsistentNaming
+var WebApi = (function () {
+    function WebApi() {
+        this.time = $("#time");
+        this.outside = $("#out-temp");
+        this.inside = $("#in-temp");
+        this.humidity = $("#humidity");
+        this.lux = $("#lux");
+        this.outsideMin = $("#out-min");
+        this.outsideMinTime = $("#out-min-time");
+        this.outsideMax = $("#out-max");
+        this.outsideMaxTime = $("#out-max-time");
+    }
+    WebApi.prototype.emptyDivs = function () {
+        this.outside.empty();
+        this.inside.empty();
+        this.humidity.empty();
+        this.lux.empty();
+        this.outsideMin.empty();
+        this.outsideMax.empty();
+    };
+    WebApi.prototype.refreshData = function () {
+        var _this = this;
+        $.ajax({
+            type: "GET",
+            url: "../api/Sensor",
+            contentType: "application/json"
+        }).done(function (model) {
+            _this.time.html(function () { return model.Time; });
+            _this.emptyDivs();
+            _this.outside.append(model.Sensor.Outside + "<small><sup>\u00B0</sup>C</small>");
+            _this.inside.append(model.Sensor.Inside + "<small><sup>\u00B0</sup>C</small>");
+            _this.humidity.append(model.Sensor.Humidity + "<small>%</small>");
+            _this.lux.append(model.Sensor.Lux + "<small>lux</small>");
+            _this.outsideMinTime.html(function () { return ("MIN at " + model.OutsideMinTime); });
+            _this.outsideMaxTime.html(function () { return ("MAX at " + model.OutsideMaxTime); });
+            _this.outsideMin.append(model.OutsideMin + "<small><sup>\u00B0</sup>C</small>");
+            _this.outsideMax.append(model.OutsideMax + "<small><sup>\u00B0</sup>C</small>");
+        });
+    };
+    return WebApi;
+}());
 window.onload = function () {
     $.ajax({
         type: "GET",
@@ -73,12 +121,13 @@ window.onload = function () {
     }).done(function (result) {
         console.log(result);
     });
-    var ba = new Array();
-    var i = new Series();
-    i.name = "Inside";
-    i.data = [22.3, 25.6, 26.4, 30.6];
-    ba.push(i);
-    var chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"], ba);
+    var api = new WebApi();
+    //let ba = new Array<ISeries<number>>();
+    //let i : ISeries<number> = new Series();
+    //i.name = "Inside";
+    //i.data = [22.3, 25.6, 26.4, 30.6];
+    //ba.push(i);
+    //let chart = new LineChart(["8:00", "8:00", "8:00", "8:00", "8:00", "8:00"],ba);
     var body = document.body;
     setTimeout(function () {
         body.classList.add("active");
@@ -86,9 +135,9 @@ window.onload = function () {
     $(".refresh")
         .click(function () {
         body.classList.remove("active");
+        api.refreshData();
         setTimeout(function () {
             body.classList.add("active");
         }, 1500);
     });
 };
-//# sourceMappingURL=app.js.map
