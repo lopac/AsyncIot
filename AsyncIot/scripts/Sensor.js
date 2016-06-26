@@ -3,4 +3,3 @@ var Sensor = (function () {
     }
     return Sensor;
 }());
-//# sourceMappingURL=Sensor.js.map

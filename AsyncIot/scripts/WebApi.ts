@@ -22,6 +22,9 @@ class WebApi {
         $(".refresh").hide();
 
         for (let i = 0; i < 6; i++) {
+            const containerColor = (i + 1) % 2 ? "#22375A" : "#D05340";
+            this.tiles[i].container.css("background", containerColor);
+
             this.tiles[i].title.empty();
             this.tiles[i].body.empty();
         }
@@ -95,6 +98,15 @@ class WebApi {
             $(".refresh").show();
 
             this.refreshTiles();
+            for (let i = 0; i < 4; i++) {
+            this.tiles[0].container.css("background","#fff");
+
+            }
+
+            this.tiles[4].container.css("background", "#21b2ea");
+            this.tiles[5].container.css("background", "#a31c15");
+
+            
 
             this.tiles[0].title.html(() => `Outside`);
             this.tiles[1].title.html(() => `Inside`);

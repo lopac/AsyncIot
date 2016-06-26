@@ -24,8 +24,8 @@ namespace AsyncIot.Controllers
             {
                 Sensor = db.Snaps.OrderByDescending(x => x.Id).First().Sensor,
                 Time = db.Snaps.OrderByDescending(x => x.Id).First().DateTime.ToString("HH:mm"),
-                SunriseTime = db.Sun(x => x.DateTime.Hour < 12, x => x.Sensor.Lux >= 50, true).DateTime.ToString("HH:mm"),
-                SunsetTime = db.Sun(x => x.DateTime.Hour > 12, x => x.Sensor.Lux <= 50, false).DateTime.ToString("HH:mm")
+                SunriseTime = db.Sun(x => x.DateTime.Hour < 12, x => x.Sensor.Lux >= 50, true)?.DateTime.ToString("HH:mm"),
+                SunsetTime = db.Sun(x => x.DateTime.Hour > 12, x => x.Sensor.Lux <= 50, false)?.DateTime.ToString("HH:mm")
             };
 
 

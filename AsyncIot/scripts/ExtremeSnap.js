@@ -3,4 +3,3 @@ var ExtremeSnap = (function () {
     }
     return ExtremeSnap;
 }());
-//# sourceMappingURL=ExtremeSnap.js.map

@@ -3,4 +3,3 @@ var Snap = (function () {
     }
     return Snap;
 }());
-//# sourceMappingURL=Snap.js.map

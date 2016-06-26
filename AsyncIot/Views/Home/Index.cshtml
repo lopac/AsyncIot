@@ -94,40 +94,40 @@
             
             <h4 id="time" class="col-md-6 col-xs-6 col-lg-6 text-right">TIME: @Model.Time h</h4>
             <ul class="widget col-md-12 row">
-                <li class="col-lg-6 col-md-6 col-xs-12">
+                <li id="tile1-container" class="col-lg-6 col-md-6 col-xs-12">
                     <h2 id="tile1-title">Outside Temperature</h2>
                     <div id="tile1-val" class="val">
-                        @Model.Sensor.Outside<small><sup>°</sup>c</small>
+                        @Model.Sensor.Outside<small><sup>o</sup>c</small>
                     </div>
                 </li>
-                <li class="col-lg-6 col-md-6 col-xs-12">
+                <li id="tile2-container" class="col-lg-6 col-md-6 col-xs-12">
                     <h2 id="tile2-title">Inside Temperature</h2>
                     <div id="tile2-val" class="val">
-                        @Model.Sensor.Inside<small><sup>°</sup>c</small>
+                        @Model.Sensor.Inside<small><sup>o</sup>c</small>
                     </div>
                 </li>
-                <li class="col-lg-6 col-md-6 col-xs-12">
+                <li id="tile3-container" class="col-lg-6 col-md-6 col-xs-12">
                     <h2 id="tile3-title">Humidity</h2>
                     <div id="tile3-val" class="val">
                         @Model.Sensor.Humidity<small>%</small>
                     </div>
                 </li>
-                <li class="col-lg-6 col-md-6 col-xs-12">
+                <li id="tile4-container" class="col-lg-6 col-md-6 col-xs-12">
                     <h2 id="tile4-title">illuminance</h2>
                     <div id="tile4-val" class="val">
                         @Model.Sensor.Lux<small>lux</small>
                     </div>
                 </li>
-                <li class="col-lg-6 col-md-6 col-xs-12" style="background: #22375a; color: white;">
+                <li id="tile5-container" class="col-lg-6 col-md-6 col-xs-12" style="background: #22375a; color: white;">
                     <h2 id="tile5-title">Sunrise</h2>
                     <div id="tile5-val" class="val" style="color: white;">
-                       @sunrise<small><sup>°</sup>c</small>
+                       @sunrise<small>h</small>
                     </div>
                 </li>
-                <li class="col-md-6 col-xs-12" style="background: #d05340; color: white;">
+                <li id="tile6-container" class="col-md-6 col-xs-12" style="background: #d05340; color: white;">
                     <h2 id="tile6-title">Sunset</h2>
                     <div id="tile6-val" class="val" style="color: white;">
-                        @sunset<small><sup>°</sup>c</small>
+                        @sunset<small>h</small>
                     </div>
                 </li>
             </ul>

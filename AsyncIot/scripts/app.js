@@ -43,4 +43,3 @@ window.onload = function () {
         }, 1500);
     });
 };
-//# sourceMappingURL=app.js.map
