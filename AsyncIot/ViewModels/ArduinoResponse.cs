@@ -1,6 +1,6 @@
 ﻿using AsyncIot.Models;
 
-namespace AsyncIot.ViewModel
+namespace AsyncIot.ViewModels
 {
     public class ArduinoResponse
     {

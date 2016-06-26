@@ -1,7 +1,10 @@
-﻿@model AsyncIot.ViewModel.HomeViewModel
+﻿@model AsyncIot.ViewModels.HomeModel
 
 @{
     Layout = null;
+
+    var sunrise = Model.SunriseTime ?? "N/A";
+    var sunset = Model.SunsetTime ?? "N/A";
 }
 
 <!DOCTYPE html>
@@ -58,7 +61,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://piv.pivpiv.dk/">Login</a>
+                       @* <a href="http://piv.pivpiv.dk/">Login</a>*@
                     </li>
                 </ul>
 
@@ -73,6 +76,13 @@
 
     <div class="row">
 
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" id="sensors-tab">Sensors</a></li>
+            <li><a data-toggle="tab" id="day-extremes-tab">Day extremes</a></li>
+            <li><a data-toggle="tab" id="month-extremes-tab">Month extremes</a></li>
+           
+        </ul>
+
         <div class="col-md-6 col-xs-6 col-lg-6 pull-left" style="z-index: 1;">
             <h4 class="refresh">
                 <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -80,46 +90,49 @@
             </h4>
 
         </div>
+        <div id="sensor-tiles">
+            
+            <h4 id="time" class="col-md-6 col-xs-6 col-lg-6 text-right">TIME: @Model.Time h</h4>
+            <ul class="widget col-md-12 row">
+                <li class="col-lg-6 col-md-6 col-xs-12">
+                    <h2 id="tile1-title">Outside Temperature</h2>
+                    <div id="tile1-val" class="val">
+                        @Model.Sensor.Outside<small><sup>°</sup>c</small>
+                    </div>
+                </li>
+                <li class="col-lg-6 col-md-6 col-xs-12">
+                    <h2 id="tile2-title">Inside Temperature</h2>
+                    <div id="tile2-val" class="val">
+                        @Model.Sensor.Inside<small><sup>°</sup>c</small>
+                    </div>
+                </li>
+                <li class="col-lg-6 col-md-6 col-xs-12">
+                    <h2 id="tile3-title">Humidity</h2>
+                    <div id="tile3-val" class="val">
+                        @Model.Sensor.Humidity<small>%</small>
+                    </div>
+                </li>
+                <li class="col-lg-6 col-md-6 col-xs-12">
+                    <h2 id="tile4-title">illuminance</h2>
+                    <div id="tile4-val" class="val">
+                        @Model.Sensor.Lux<small>lux</small>
+                    </div>
+                </li>
+                <li class="col-lg-6 col-md-6 col-xs-12" style="background: #22375a; color: white;">
+                    <h2 id="tile5-title">Sunrise</h2>
+                    <div id="tile5-val" class="val" style="color: white;">
+                       @sunrise<small><sup>°</sup>c</small>
+                    </div>
+                </li>
+                <li class="col-md-6 col-xs-12" style="background: #d05340; color: white;">
+                    <h2 id="tile6-title">Sunset</h2>
+                    <div id="tile6-val" class="val" style="color: white;">
+                        @sunset<small><sup>°</sup>c</small>
+                    </div>
+                </li>
+            </ul>
 
-        <h4 id="time" class="col-md-6 col-xs-6 col-lg-6 text-right">TIME: @Model.Time h</h4>
-        <ul class="widget col-md-12 row">
-            <li class="col-lg-6 col-md-6 col-xs-12">
-                <h2>Outside Temperature</h2>
-                <div id="out-temp" class="val">
-                    @Model.Sensor.Outside<small><sup>°</sup>c</small>
-                </div>
-            </li>
-            <li class="col-lg-6 col-md-6 col-xs-12">
-                <h2>Inside Temperature</h2>
-                <div id="in-temp" class="val">
-                    @Model.Sensor.Inside<small><sup>°</sup>c</small>
-                </div>
-            </li>
-            <li class="col-lg-6 col-md-6 col-xs-12">
-                <h2>Humidity</h2>
-                <div id="humidity" class="val">
-                    @Model.Sensor.Humidity<small>%</small>
-                </div>
-            </li>
-            <li class="col-lg-6 col-md-6 col-xs-12">
-                <h2>illuminance</h2>
-                <div id="lux" class="val">
-                    @Model.Sensor.Lux<small>lux</small>
-                </div>
-            </li>
-            <li class="col-lg-6 col-md-6 col-xs-12" style="background: #22375a; color: white;">
-                <h2 id="out-min-time">Min. outside at @Model.OutsideMinTime</h2>
-                <div id="out-min" class="val" style="color: white;">
-                    @Model.OutsideMin<small><sup>°</sup>c</small>
-                </div>
-            </li>
-            <li class="col-md-6 col-xs-12" style="background: #d05340; color: white;">
-                <h2 id="out-max-time">Max. outside at @Model.OutsideMaxTime</h2>
-                <div id="out-max" class="val" style="color: white;">
-                    @Model.OutsideMax<small><sup>°</sup>c</small>
-                </div>
-            </li>
-        </ul>
+        </div>
 
         <div id="tempGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
         <div id="humidityGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
@@ -132,8 +145,10 @@
 
 </div>
 
-    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
     <script src="/scripts/ISeries.js"></script>
+    <script src="/scripts/ExtremeSnap.js"></script>
+    <script src="/scripts/Tile.js"></script>
     <script src="/scripts/LineChart.js"></script>
     <script src="/scripts/Sensor.js"></script>
     <script src="/scripts/HomeViewModel.js"></script>
@@ -141,7 +156,7 @@
     <script src="/scripts/CentralHeating.js"></script>
     <script src="/scripts/Snap.js"></script>
     <script src="/scripts/List.js"></script>
-    <script src="/Scripts/Series.js"></script>
-    <script src="/Scripts/app.js"></script>
+    <script src="/scripts/Series.js"></script>
+    <script src="/scripts/app.js"></script>
 </body>
 </html>
