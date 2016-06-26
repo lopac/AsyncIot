@@ -5,3 +5,4 @@ var Series = (function () {
     }
     return Series;
 }());
+//# sourceMappingURL=Series.js.map

@@ -23,7 +23,10 @@ class WebApi {
 
         for (let i = 0; i < 6; i++) {
             const containerColor = (i + 1) % 2 ? "#22375A" : "#D05340";
+
             this.tiles[i].container.css("background", containerColor);
+            this.tiles[i].title.css("color", "white");
+            this.tiles[i].body.css("color", "white");
 
             this.tiles[i].title.empty();
             this.tiles[i].body.empty();
@@ -99,7 +102,10 @@ class WebApi {
 
             this.refreshTiles();
             for (let i = 0; i < 4; i++) {
-            this.tiles[0].container.css("background","#fff");
+                this.tiles[i].container.css("background", "white");
+                this.tiles[i].title.css("color", "black");
+                this.tiles[i].body.css("color", "black");
+
 
             }
 

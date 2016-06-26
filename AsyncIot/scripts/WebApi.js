@@ -13,6 +13,8 @@ var WebApi = (function () {
         for (var i = 0; i < 6; i++) {
             var containerColor = (i + 1) % 2 ? "#22375A" : "#D05340";
             this.tiles[i].container.css("background", containerColor);
+            this.tiles[i].title.css("color", "white");
+            this.tiles[i].body.css("color", "white");
             this.tiles[i].title.empty();
             this.tiles[i].body.empty();
         }
@@ -71,7 +73,9 @@ var WebApi = (function () {
             $(".refresh").show();
             _this.refreshTiles();
             for (var i = 0; i < 4; i++) {
-                _this.tiles[0].container.css("background", "#fff");
+                _this.tiles[i].container.css("background", "white");
+                _this.tiles[i].title.css("color", "black");
+                _this.tiles[i].body.css("color", "black");
             }
             _this.tiles[4].container.css("background", "#21b2ea");
             _this.tiles[5].container.css("background", "#a31c15");
@@ -132,3 +136,4 @@ var WebApi = (function () {
     };
     return WebApi;
 }());
+//# sourceMappingURL=WebApi.js.map

@@ -22,17 +22,6 @@
     transform: scale(0);
 }
 
-/*.widget li:hover  {
-    background: #3a5d96;
-    color: white;
-}
-
-.widget li:hover * {
-    background: #3a5d96;
-    color: white;
-}*/
-
-
 
 
 .widget li:nth-child(2) {

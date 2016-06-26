@@ -6,3 +6,4 @@ var Tile = (function () {
     }
     return Tile;
 }());
+//# sourceMappingURL=Tile.js.map
