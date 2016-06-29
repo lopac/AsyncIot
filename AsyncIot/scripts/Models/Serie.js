@@ -3,3 +3,4 @@ var Serie = (function () {
     }
     return Serie;
 }());
+//# sourceMappingURL=Serie.js.map

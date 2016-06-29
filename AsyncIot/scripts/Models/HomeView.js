@@ -3,3 +3,4 @@ var HomeViewModel = (function () {
     }
     return HomeViewModel;
 }());
+//# sourceMappingURL=HomeView.js.map

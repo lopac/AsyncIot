@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AsyncIot.Helpers;
 using AsyncIot.Models;
 using AsyncIot.ViewModels;
 
@@ -16,14 +14,15 @@ namespace AsyncIot.Controllers
         {
 
 
+            var response = Arduino.Response;
+
             var model = new HomeModel
             {
-                Sensor = db.Snaps.OrderByDescending(x=> x.Id).First().Sensor,
-                Time = db.Snaps.OrderByDescending(x => x.Id).First().DateTime.ToString("HH:mm"),
-                SunriseTime = db.Sun(x => x.DateTime.Hour < 12, x => x.Sensor.Lux >= 50,true)?.DateTime.ToString("HH:mm"),
-                SunsetTime = db.Sun(x => x.DateTime.Hour > 12, x => x.Sensor.Lux <= 50,false)?.DateTime.ToString("HH:mm")
+                Sensor = response.Sensor,
+                Time = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, _hrTimeZone).ToString("HH:mm"),
+                SunriseTime = db.Sun(x => x.DateTime.Hour < 12, x => x.Sensor.Lux >= 50, true)?.DateTime.ToString("HH:mm"),
+                SunsetTime = db.Sun(x => x.DateTime.Hour > 16, x => x.Sensor.Lux <= 50, false)?.DateTime.ToString("HH:mm")
             };
-
 
 
             return View(model);

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using AsyncIot.Helpers;
 using AsyncIot.Models;
 using AsyncIot.ViewModels;
 
@@ -12,23 +9,19 @@ namespace AsyncIot.Controllers
     public class SensorController : ApiController
     {
         private DatabaseContext db = new DatabaseContext();
+        private readonly TimeZoneInfo _hrTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
         public IHttpActionResult Get()
         {
-            var snapController = new SnapController();
-            snapController.Get("b8ac3b5508740332bef1033b923425b2d1b7cedffb25d26b4eb8d9c0073c4e10");
 
-
-
+            var response = Arduino.Response;
 
             var model = new HomeModel
             {
-                Sensor = db.Snaps.OrderByDescending(x => x.Id).First().Sensor,
-                Time = db.Snaps.OrderByDescending(x => x.Id).First().DateTime.ToString("HH:mm"),
+                Sensor = response.Sensor,
+                Time = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, _hrTimeZone).ToString("HH:mm"),
                 SunriseTime = db.Sun(x => x.DateTime.Hour < 12, x => x.Sensor.Lux >= 50, true)?.DateTime.ToString("HH:mm"),
-                SunsetTime = db.Sun(x => x.DateTime.Hour > 12, x => x.Sensor.Lux <= 50, false)?.DateTime.ToString("HH:mm")
+                SunsetTime = db.Sun(x => x.DateTime.Hour > 16, x => x.Sensor.Lux <= 50, false)?.DateTime.ToString("HH:mm")
             };
-
-
 
             return Ok(model);
         }

@@ -123,3 +123,4 @@ var WebApi = (function () {
     };
     return WebApi;
 }());
+//# sourceMappingURL=WebApiController.js.map

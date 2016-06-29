@@ -3,3 +3,4 @@ var Chart = (function () {
     }
     return Chart;
 }());
+//# sourceMappingURL=Chart.js.map

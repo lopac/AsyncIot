@@ -45,3 +45,4 @@ var LineChart = (function () {
     }
     return LineChart;
 }());
+//# sourceMappingURL=LineChartController.js.map

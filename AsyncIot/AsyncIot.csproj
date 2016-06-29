@@ -192,7 +192,6 @@
     <Content Include="Content\favicon\ms-icon-150x150.png" />
     <Content Include="Content\favicon\ms-icon-310x310.png" />
     <Content Include="Content\favicon\ms-icon-70x70.png" />
-    <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -236,9 +235,11 @@
     <Compile Include="Controllers\SensorController.cs" />
     <Compile Include="Controllers\SnapController.cs" />
     <Compile Include="Controllers\SnapsController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Arduino.cs" />
     <Compile Include="Migrations\201606232027421_Initial.cs" />
     <Compile Include="Migrations\201606232027421_Initial.Designer.cs">
       <DependentUpon>201606232027421_Initial.cs</DependentUpon>
