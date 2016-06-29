@@ -1,5 +1,5 @@
-﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-/// <reference path="../scripts/typings/highcharts/highcharts.d.ts" />
+﻿/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/highcharts/highcharts.d.ts" />
 
 
 

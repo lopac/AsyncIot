@@ -1,12 +1,7 @@
-class LineChart {
-    grapChart: JQuery;
-
-    constructor(id:string,title:string,labels: Array<string>, series: Array<ISeries<number>>) {
-
-        this.grapChart = $(`#${id}`);
-
+var LineChart = (function () {
+    function LineChart(id, title, labels, series) {
+        this.grapChart = $("#" + id);
         this.grapChart.empty();
-
         Highcharts.chart({
             chart: {
                 renderTo: this.grapChart[0]
@@ -23,7 +18,6 @@ class LineChart {
                 categories: labels
             },
             yAxis: {
-
                 title: {
                     text: "Sensor value"
                 },
@@ -46,9 +40,8 @@ class LineChart {
             },
             series: series
         });
-
         $(".highcharts-container").children("svg").children("text:last").hide();
         $(".highcharts-button").hide();
-
     }
-}
+    return LineChart;
+}());

@@ -19,9 +19,9 @@ namespace AsyncIot.Controllers
 
         public IHttpActionResult Get(string id)
         {
-            if (id != "b8ac3b5508740332bef1033b923425b2d1b7cedffb25d26b4eb8d9c0073c4e10")
+            if (id != Api.Key)
             {
-                return InternalServerError();
+                return BadRequest("Bad API key!");
             }
             try
             {

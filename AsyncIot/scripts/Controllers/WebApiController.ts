@@ -55,35 +55,15 @@ class WebApi {
     public drawCharts() {
         $.ajax({
             type: "GET",
-            url: "../api/Snaps/today"
-        }).done((snaps: Array<Snap>) => {
+            url: "../api/chart",
+            contentType: "application/json"
+        }).done((model: ChartView) => {
 
 
-            let labels = new Array<string>();
-            let insideS = new Series("Inside");
-            let outsideS = new Series("Outside");
-            let luxSeries = new Series("Lux");
-            let humiditySeries = new Series("Humidity");
-
-            for (let i = 0; i < snaps.length; i++) {
-                insideS.data.push(snaps[i].Sensor.Inside);
-                outsideS.data.push(snaps[i].Sensor.Outside);
-                humiditySeries.data.push(snaps[i].Sensor.Humidity);
-                luxSeries.data.push(snaps[i].Sensor.Lux);
-
-                labels.push(snaps[i].DateTime.split("T")[1].split(".")[0].substring(0, 5));
-
-            }
-
-            let tempSeries = new Array<Series>();
-
-
-            tempSeries.push(insideS);
-            tempSeries.push(outsideS);
-
-            let chart = new LineChart("tempGraph", "Temperatures", labels, tempSeries);
-            let chart1 = new LineChart("humidityGraph", "Humidity", labels, [humiditySeries]);
-            let chart2 = new LineChart("luxGraph", "Lux", labels, [luxSeries]);
+            // ReSharper disable WrongExpressionStatement
+            new LineChart("tempGraph", model.Charts[0].Title, model.Labels, model.Charts[0].Series);
+            new LineChart("humidityGraph", model.Charts[1].Title, model.Labels, model.Charts[1].Series);
+            new LineChart("luxGraph", model.Charts[2].Title, model.Labels, model.Charts[2].Series);
 
         });
     }
