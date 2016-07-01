@@ -2,7 +2,7 @@
 
 namespace AsyncIot.ViewModels
 {
-    public class ChartView
+    public class ChartViewModel
     {
         public ICollection<object> Charts { get; set; }
         public ICollection<string> Labels { get; set; }

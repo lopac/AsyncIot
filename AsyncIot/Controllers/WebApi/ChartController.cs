@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using AsyncIot.Models;
+using AsyncIot.Models.Database;
 using AsyncIot.ViewModels;
 
 namespace AsyncIot.Controllers
@@ -22,7 +22,7 @@ namespace AsyncIot.Controllers
             }
 
 
-            var model = new ChartView
+            var model = new ChartViewModel
             {
                 Labels = labels,
                 Charts = new List<object>

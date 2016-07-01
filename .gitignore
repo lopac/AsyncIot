@@ -245,3 +245,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /AsyncIot/Controllers/Api.cs
+/AsyncIot/Helpers/Api.cs

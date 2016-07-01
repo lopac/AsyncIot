@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http;
-using AsyncIot.Models;
 using AsyncIot.Helpers;
+using AsyncIot.Models.Database;
 
 namespace AsyncIot.Controllers
 {

@@ -1,162 +1,99 @@
 ﻿@model AsyncIot.ViewModels.HomeModel
 
 @{
-    Layout = null;
+    ViewBag.Title = "Async Iot - Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
     var sunrise = Model.SunriseTime ?? "N/A";
     var sunset = Model.SunsetTime ?? "N/A";
 }
 
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="row">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/Content/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/Content/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/Content/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/Content/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/Content/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/Content/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/Content/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/Content/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/Content/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/Content/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/Content/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/Content/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/Content/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/Content/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a data-toggle="tab" id="sensors-tab">Sensors</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="day-extremes-tab">Day extremes</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="month-extremes-tab">Month extremes</a>
+        </li>
 
-    <title>Async IOT</title>
-    <link href="/Content/Cosmo.css" rel="stylesheet">
-    <link href="/Content/style.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-2.2.2.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-</head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" >
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a href="#" class="navbar-left" style="margin-top: 5px;">
-                    <img class="text-left" style="margin-top: 5px; margin-right: 3px;" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMzLjA2MiAzMy4wNjIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMzLjA2MiAzMy4wNjI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij4KPGc+Cgk8cGF0aCBkPSJNMjUuNjE1LDI2LjYwOEg2LjQ0MkMyLjg5LDI2LjYwOCwwLDIzLjcxOSwwLDIwLjE2OGMwLTMuNTAyLDIuODEtNi4zNjEsNi4yOTQtNi40MzljMS4yNDEtNC4zMDQsNS4xNjEtNy4yNzUsOS42Ny03LjI3NSAgIGMzLjczNiwwLDcuMTAxLDIuMDIzLDguODY2LDUuMzA2YzAuMjYtMC4wMjYsMC41MjItMC4wNCwwLjc4NC0wLjA0YzQuMTA2LDAsNy40NDYsMy4zMzksNy40NDYsNy40NDMgICBDMzMuMDYyLDIzLjI2OCwyOS43MjEsMjYuNjA4LDI1LjYxNSwyNi42MDh6IE02LjUyNywxNC43MzJDMy40MzcsMTQuNzMyLDEsMTcuMTcsMSwyMC4xNjhjMCwyLjk5OSwyLjQ0MSw1LjQzOSw1LjQ0Miw1LjQzOWgxOS4xNzMgICBjMy41NTUsMCw2LjQ0Ni0yLjg5Miw2LjQ0Ni02LjQ0NWMwLTMuNTUzLTIuODkyLTYuNDQzLTYuNDQ2LTYuNDQzYy0wLjMxNCwwLTAuNjMsMC4wMjItMC45MzksMC4wNjYgICBjLTAuMjI5LDAuMDYzLTAuNDY5LTAuMDQ2LTAuNTc0LTAuMjU5Yy0xLjU0NS0zLjEzLTQuNjYzLTUuMDczLTguMTM3LTUuMDczYy00LjE4MywwLTcuODAzLDIuODM5LTguODA0LDYuOTA0ICAgYy0wLjA1NiwwLjIyOC0wLjI3OCwwLjM3Mi0wLjQ5OCwwLjM4MWwtMC4xMjctMC4wMDdDNi41MzMsMTQuNzMyLDYuNTMsMTQuNzMyLDYuNTI3LDE0LjczMnoiIGZpbGw9IiNGRkZGRkYiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
-                </a>
-                <a class="navbar-brand">Async IOT</a>
-
-            </div>
-
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-2" aria-expanded="false" style="height: 1px;">
+    </ul>
+    <hr>
 
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                            <a href="https://github.com/lopac/AsyncIot">Project on GitHub</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-
-<div class="container" style="margin-top: 70px;">
-
-
-
-
-    <div class="row">
-
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" id="sensors-tab">Sensors</a></li>
-            <li><a data-toggle="tab" id="day-extremes-tab">Day extremes</a></li>
-            <li><a data-toggle="tab" id="month-extremes-tab">Month extremes</a></li>
-           
-        </ul>
-
-        <div class="col-md-6 col-xs-6 col-lg-6 pull-left" style="z-index: 1;">
-            <h4 class="refresh">
-                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                Refresh
-            </h4>
-
-        </div>
-        <div id="sensor-tiles">
-            
-            <h4 id="time" class="col-md-6 col-xs-6 col-lg-6 text-right">TIME: @Model.Time h</h4>
-            <ul class="widget col-md-12 row">
-                <li id="tile1-container" class="col-lg-6 col-md-6 col-xs-12">
-                    <h2 id="tile1-title">Outside Temperature</h2>
-                    <div id="tile1-val" class="val">
-                        @Model.Sensor.Outside<small><sup>o</sup>c</small>
-                    </div>
-                </li>
-                <li id="tile2-container" class="col-lg-6 col-md-6 col-xs-12">
-                    <h2 id="tile2-title">Inside Temperature</h2>
-                    <div id="tile2-val" class="val">
-                        @Model.Sensor.Inside<small><sup>o</sup>c</small>
-                    </div>
-                </li>
-                <li id="tile3-container" class="col-lg-6 col-md-6 col-xs-12">
-                    <h2 id="tile3-title">Humidity</h2>
-                    <div id="tile3-val" class="val">
-                        @Model.Sensor.Humidity<small>%</small>
-                    </div>
-                </li>
-                <li id="tile4-container" class="col-lg-6 col-md-6 col-xs-12">
-                    <h2 id="tile4-title">illuminance</h2>
-                    <div id="tile4-val" class="val">
-                        @Model.Sensor.Lux<small>lux</small>
-                    </div>
-                </li>
-                <li id="tile5-container" class="col-lg-6 col-md-6 col-xs-12" style="background: #21b2ea; color: white;">
-                    <h2 id="tile5-title">Sunrise</h2>
-                    <div id="tile5-val" class="val" style="color: white;">
-                       @sunrise<small>h</small>
-                    </div>
-                </li>
-                <li id="tile6-container" class="col-md-6 col-xs-12" style="background: #a31c15; color: white;">
-                    <h2 id="tile6-title">Sunset</h2>
-                    <div id="tile6-val" class="val" style="color: white;">
-                        @sunset<small>h</small>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-
-        <div id="tempGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
-        <div id="humidityGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
-        <div id="luxGraph" class="col-xs-12 col-lg-12" style="margin-bottom: 200px; margin-top: 50px;"></div>
-
-
-
+    <div class="col-md-6 col-xs-6 col-lg-6 pull-left" style="z-index: 1;">
+        <h4 class="refresh">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            Refresh
+        </h4>
 
     </div>
+    <div id="sensor-tiles">
 
+        <h4 id="time" class="col-md-6 col-xs-6 col-lg-6 text-right">TIME: @Model.Time h</h4>
+        <ul class="widget col-md-12 row">
+            <li id="tile1-container" class="col-lg-6 col-md-6 col-xs-12">
+                <h2 id="tile1-title">Outside Temperature</h2>
+                <div id="tile1-val" class="val">
+                    @Model.Sensor.Outside<small><sup>o</sup>c</small>
+                </div>
+            </li>
+            <li id="tile2-container" class="col-lg-6 col-md-6 col-xs-12">
+                <h2 id="tile2-title">Inside Temperature</h2>
+                <div id="tile2-val" class="val">
+                    @Model.Sensor.Inside<small><sup>o</sup>c</small>
+                </div>
+            </li>
+            <li id="tile3-container" class="col-lg-6 col-md-6 col-xs-12">
+                <h2 id="tile3-title">Humidity</h2>
+                <div id="tile3-val" class="val">
+                    @Model.Sensor.Humidity<small>%</small>
+                </div>
+            </li>
+            <li id="tile4-container" class="col-lg-6 col-md-6 col-xs-12">
+                <h2 id="tile4-title">illuminance</h2>
+                <div id="tile4-val" class="val">
+                    @Model.Sensor.Lux<small>lux</small>
+                </div>
+            </li>
+            <li id="tile5-container" class="col-lg-6 col-md-6 col-xs-12" style="background: #e5e5e5; color: white;">
+                <h2 id="tile5-title">Sunrise</h2>
+                <div id="tile5-val" class="val" style="color: white;">
+                    @sunrise<small>h</small>
+                </div>
+            </li>
+            <li id="tile6-container" class="col-md-6 col-xs-12" style="background: #c61331; color: white;">
+                <h2 id="tile6-title">Sunset</h2>
+                <div id="tile6-val" class="val" style="color: white;">
+                    @sunset<small>h</small>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="tempGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
+    <div id="humidityGraph" class="col-xs-12 col-lg-12" style="margin-top: 50px;"></div>
+    <div id="luxGraph" class="col-xs-12 col-lg-12" style="margin-bottom: 200px; margin-top: 50px;"></div>
 </div>
 
-    <script src="/scripts/bootstrap.min.js"></script>
-    <script src="/scripts/Interfaces/ISeries.js"></script>
-    <script src="/scripts/Models/ExtremeSnap.js"></script>
-    <script src="/scripts/Models/Tile.js"></script>
-    <script src="/scripts/Models/Sensor.js"></script>
-    <script src="/scripts/Models/Serie.js"></script>
-    <script src="/scripts/Models/HomeView.js"></script>
-    <script src="/scripts/Models/Snap.js"></script>
-    <script src="/scripts/Models/ChartView.js"></script>
-    <script src="/scripts/Models/CentralHeating.js"></script>
-    <script src="/scripts/Controllers/LineChartController.js"></script>
-    <script src="/scripts/Controllers/WebApiController.js"></script>
-    <script src="/scripts/Controllers/HomeController.js"></script>
-</body>
-</html>
+
+
+
+@Scripts.Render("~/scripts/bootstrap.min.js")
+@Scripts.Render("~/scripts/Interfaces/ISeries.js")
+@Scripts.Render("~/scripts/Models/ExtremeSnap.js")
+@Scripts.Render("~/scripts/Models/Tile.js")
+@Scripts.Render("~/scripts/Models/Sensor.js")
+@Scripts.Render("~/scripts/Models/Serie.js")
+@Scripts.Render("~/scripts/Models/HomeView.js")
+@Scripts.Render("~/scripts/Models/Snap.js")
+@Scripts.Render("~/scripts/Models/ChartView.js")
+@Scripts.Render("~/scripts/Models/CentralHeating.js")
+@Scripts.Render("~/scripts/Controllers/LineChartController.js")
+@Scripts.Render("~/scripts/Controllers/WebApiController.js")
+@Scripts.Render("~/scripts/Controllers/HomeController.js")

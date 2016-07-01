@@ -64,8 +64,8 @@ var WebApi = (function () {
                 _this.tiles[i].title.css("color", "black");
                 _this.tiles[i].body.css("color", "black");
             }
-            _this.tiles[4].container.css("background", "#21b2ea");
-            _this.tiles[5].container.css("background", "#a31c15");
+            _this.tiles[4].container.css("background", "#e5e5e5");
+            _this.tiles[5].container.css("background", "#c61331");
             _this.tiles[0].title.html(function () { return "Outside"; });
             _this.tiles[1].title.html(function () { return "Inside"; });
             _this.tiles[2].title.html(function () { return "Humidity"; });

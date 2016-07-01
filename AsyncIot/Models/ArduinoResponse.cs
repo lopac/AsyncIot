@@ -1,4 +1,5 @@
 ﻿using AsyncIot.Models;
+using AsyncIot.Models.Database;
 
 namespace AsyncIot.ViewModels
 {
@@ -7,6 +8,5 @@ namespace AsyncIot.ViewModels
         public Sensor Sensor { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public Settings Settings { get; set; }
-
     }
 }

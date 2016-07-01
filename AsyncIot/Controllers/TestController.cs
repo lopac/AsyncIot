@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Http;
-using AsyncIot.Models;
+using AsyncIot.Models.Database;
 
 namespace AsyncIot.Controllers
 {

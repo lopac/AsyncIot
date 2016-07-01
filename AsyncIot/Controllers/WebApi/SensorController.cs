@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using AsyncIot.Helpers;
-using AsyncIot.Models;
+using AsyncIot.Models.Database;
 using AsyncIot.ViewModels;
 
 namespace AsyncIot.Controllers
@@ -15,7 +15,7 @@ namespace AsyncIot.Controllers
 
             var response = Arduino.Response;
 
-            var model = new HomeModel
+            var model = new HomeViewModel
             {
                 Sensor = response.Sensor,
                 Time = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, _hrTimeZone).ToString("HH:mm"),

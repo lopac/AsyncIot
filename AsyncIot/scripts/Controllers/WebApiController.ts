@@ -89,17 +89,17 @@ class WebApi {
 
             }
 
-            this.tiles[4].container.css("background", "#21b2ea");
-            this.tiles[5].container.css("background", "#a31c15");
+            this.tiles[4].container.css("background", "#e5e5e5");
+            this.tiles[5].container.css("background", "#c61331");
 
             
 
-            this.tiles[0].title.html(() => `Outside`);
-            this.tiles[1].title.html(() => `Inside`);
-            this.tiles[2].title.html(() => `Humidity`);
-            this.tiles[3].title.html(() => `Lux`);
-            this.tiles[4].title.html(() => `Sunrise`);
-            this.tiles[5].title.html(() => `Sunset`);
+            this.tiles[0].title.html(() => "Outside");
+            this.tiles[1].title.html(() => "Inside");
+            this.tiles[2].title.html(() => "Humidity");
+            this.tiles[3].title.html(() => "Lux");
+            this.tiles[4].title.html(() => "Sunrise");
+            this.tiles[5].title.html(() => "Sunset");
           
 
             this.tiles[0].body.append(`${model.Sensor.Outside}<small><sup>o</sup>C</small>`);

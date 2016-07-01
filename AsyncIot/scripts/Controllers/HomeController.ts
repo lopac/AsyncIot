@@ -5,6 +5,7 @@
 
 window.onload = () => {
 
+
     let api = new WebApi();
 
     api.loadTilesRef();

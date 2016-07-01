@@ -1,0 +1,140 @@
+﻿@using AsyncIot.Models.Database
+@model AsyncIot.ViewModels.StatisticsViewModel
+
+@{
+    ViewBag.Title = "Async Iot - Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new DatabaseContext();
+    var firstDay = db.PresentMonthSnaps().FirstOrDefault()?.DateTime.Date.Day;
+    var i = 0;
+}
+
+<div class="row">
+
+
+    <div id="data-table2 col-md-6">
+
+        <h3 class="text-primary" style="font-weight: 100;">
+            <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+            Outside extremes @Model.Date
+        </h3>
+
+
+        <table class="table table-striped table-hover sortable">
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>Minimum</th>
+                <th>Time</th>
+                <th>Maximum</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+            @foreach(var eOutside in Model.EOutsides)
+            {
+                if (eOutside.ExtremeType == ExtremeType.Minimum)
+                {
+                    @:<tr>
+                    @:<td>@(i++ + firstDay).</td>
+                    @:<td>@eOutside.Value °C</td>
+                    @:<td>@eOutside.Time h</td>
+                }
+                else
+                {
+                    @:<td>@eOutside.Value °C</td>
+                    @:<td>@eOutside.Time h</td>
+                    @:</tr>
+                }
+
+            }
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <div id="data-table3 col-md-6">
+
+        <h3 class="text-primary" style="font-weight: 100;">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            Inside extremes @Model.Date
+        </h3>
+
+
+        <table class="table table-striped table-hover sortable">
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>Minimum</th>
+                <th>Time</th>
+                <th>Maximum</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @{ i = 0; }
+            @foreach (var eInside in Model.EInsides)
+            {
+                if (eInside.ExtremeType == ExtremeType.Minimum)
+                {
+                    @:<tr>
+                    @:<td>@(i++ + firstDay).</td>
+                    @:<td>@eInside.Value °C</td>
+                    @:<td>@eInside.Time h</td>
+                }
+                else
+                {
+                    @:<td>@eInside.Value °C</td>
+                    @:<td>@eInside.Time h</td>
+                    @:</tr>
+                }
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr/>
+
+    @*<div id="example">
+
+
+        <h3 class="text-primary" style="font-weight: 100;">
+            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+            Sun times @Model.Date
+        </h3>
+
+
+        <table class="table table-striped table-hover sortable">
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>Sunrise</th>
+                <th>Sunset</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            @for (var i = 0; i < Model.Sunrises.Count; i++)
+            {
+                <tr>
+                    <td>@(i + firstDay).</td>
+                    <td>@Model.Sunrises[i] h</td>
+                    <td>@Model.Sunsets[i] h</td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+    </div>*@
+
+</div>

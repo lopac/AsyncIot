@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using AsyncIot.Models;
+using AsyncIot.Models.Database;
 using AsyncIot.ViewModels;
 using Newtonsoft.Json;
 

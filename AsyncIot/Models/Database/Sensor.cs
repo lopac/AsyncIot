@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace AsyncIot.Models
+namespace AsyncIot.Models.Database
 {
     public class Sensor
     {

@@ -1,8 +1,8 @@
-﻿using AsyncIot.Models;
+﻿using AsyncIot.Models.Database;
 
 namespace AsyncIot.ViewModels
 {
-    public class HomeModel
+    public class HomeViewModel
     {
         public string Time { get; set; }
         public Sensor Sensor { get; set; }

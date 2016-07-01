@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using AsyncIot.Models;
+using AsyncIot.Models.Database;
 using AsyncIot.ViewModels;
 
 namespace AsyncIot.Controllers
 {
     public class ExtremesController : ApiController
     {
-        private readonly List<ExtremeSnap> _extremeSnaps = new List<ExtremeSnap>();
+        private readonly List<ExtremeViewModel> _extremeSnaps = new List<ExtremeViewModel>();
 
         public IHttpActionResult GetExtremes()
         {
             using (var db = new DatabaseContext())
             {
                 _extremeSnaps.Add(
-                    new ExtremeSnap
+                    new ExtremeViewModel
                     {
                         Id = "Outside Minimum",
                         Value =
@@ -25,7 +25,7 @@ namespace AsyncIot.Controllers
                                 .DateTime.ToString("HH:mm")
                     });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Outside Maximum",
                     Value =
@@ -35,7 +35,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Inside Minimum",
                     Value =
@@ -45,7 +45,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Inside Maximum",
                     Value =
@@ -55,7 +55,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Humidity Minimum",
                     Value =
@@ -66,7 +66,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Humidity Maximum",
                     Value =
@@ -90,7 +90,7 @@ namespace AsyncIot.Controllers
             using (var db = new DatabaseContext())
             {
                 _extremeSnaps.Add(
-                    new ExtremeSnap
+                    new ExtremeViewModel
                     {
                         Id = "Outside Minimum",
                         Value =
@@ -101,7 +101,7 @@ namespace AsyncIot.Controllers
                                 .DateTime.ToString("HH:mm dd.MM.yyyy.")
                     });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Outside Maximum",
                     Value =
@@ -111,7 +111,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm dd.MM.yyyy.")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Inside Minimum",
                     Value =
@@ -121,7 +121,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm dd.MM.yyyy.")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Inside Maximum",
                     Value =
@@ -131,7 +131,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm dd.MM.yyyy.")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Humidity Minimum",
                     Value =
@@ -142,7 +142,7 @@ namespace AsyncIot.Controllers
                             .DateTime.ToString("HH:mm dd.MM.yyyy.")
                 });
 
-                _extremeSnaps.Add(new ExtremeSnap
+                _extremeSnaps.Add(new ExtremeViewModel
                 {
                     Id = "Humidity Maximum",
                     Value =
